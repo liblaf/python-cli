@@ -26,7 +26,7 @@ def main(
         schema_comment: str = ""
         if text.startswith("#:schema "):
             # skip schema comment since `toml-sort` will add spaces before comments
-            schema_comment = text.splitlines(keepends=True)[0]
+            schema_comment = text.split("\n", 1)[0] + "\n"
             text = text.removeprefix(schema_comment)
         ts: tomlsort.TomlSort = tomlsort.TomlSort(
             text,

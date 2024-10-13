@@ -7,9 +7,13 @@ dependencies = [
   "httpx[socks]>=0.27.2",
   "lazy-loader>=0.4",
   "loguru>=0.7.2",
+  "pathspec>=0.12.1",
+  "pre-commit>=4.0.1",
   "pycomplete>=0.4.0",
   "pydantic>=2.9.2",
   "ruamel-yaml>=0.18.6",
+  "taplo>=0.9.3",
+  "toml-sort>=0.23.1",
   "tomlkit>=0.13.2",
   "typer>=0.12.5",
 ]
@@ -18,10 +22,6 @@ name = "python-cli"
 readme = "README.md"
 requires-python = ">=3.12"
 version = "0.0.0"
-
-[project.optional-dependencies]
-pre-commit = ["pre-commit>=4.0.1", "pydantic>=2.9.2"]
-sort-toml = ["taplo>=0.9.3", "toml-sort>=0.23.1"]
 
 [project.scripts]
 q = "cli.cmd:app"

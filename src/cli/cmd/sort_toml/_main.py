@@ -22,15 +22,22 @@ def main(
     files: Annotated[list[Path], typer.Argument(exists=True, dir_okay=False)],
 ) -> None:
     for fpath in files:
+        text: str = fpath.read_text()
+        schema_comment: str = ""
+        if text.startswith("#:schema "):
+            # skip schema comment since `toml-sort` will add spaces before comments
+            schema_comment = text.splitlines(keepends=True)[0]
+            text = text.removeprefix(schema_comment)
         ts: tomlsort.TomlSort = tomlsort.TomlSort(
-            fpath.read_text(),
+            text,
             sort_config=tomlsort.SortConfiguration(
                 table_keys=True, inline_tables=True, inline_arrays=True
             ),
         )
+        text: str = schema_comment + ts.sorted()
         if taplo_exe := shutil.which("taplo") or os.getenv("TAPLO"):
             text: str = cli.utils.run_with_output(
-                [taplo_exe, "format", "-"], input=ts.sorted()
+                [taplo_exe, "format", "-"], input=text
             )
         else:
             msg = "sort-toml"

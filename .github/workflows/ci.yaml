@@ -27,7 +27,9 @@ jobs:
         uses: liblaf/actions/release@main
         with:
           clobber: true
-          files: dist/*
+          files: |-
+            dist/*.tar.gz
+            dist/*.whl
           prerelease: true
           tag: latest
 

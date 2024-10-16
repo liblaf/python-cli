@@ -11,7 +11,6 @@ class InterceptHandler(logging.Handler):
 
     References:
         1. [Overview — loguru documentation](https://loguru.readthedocs.io/en/stable/overview.html#entirely-compatible-with-standard-logging)
-
     """
 
     def emit(self, record: logging.LogRecord) -> None:

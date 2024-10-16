@@ -3,6 +3,13 @@ build-backend = "hatchling.build"
 requires = ["hatchling"]
 
 [project]
+authors = [
+  { email = "30631553+liblaf@users.noreply.github.com", name = "liblaf" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "License :: OSI Approved :: MIT License",
+]
 dependencies = [
   "httpx[socks]>=0.27.2",
   "lazy-loader>=0.4",
@@ -26,6 +33,12 @@ version = "0.0.0"
 [project.scripts]
 q = "cli.cmd:app"
 sort-toml = "cli.cmd.sort_toml:app"
+
+[project.urls]
+"Bug Tracker" = "https://github.com/liblaf/python-cli/issues"
+Changelog = "https://github.com/liblaf/python-cli/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/liblaf/python-cli"
+Repository = "https://github.com/liblaf/python-cli"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/cli"]

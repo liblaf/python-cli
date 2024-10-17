@@ -1,58 +1,34 @@
+import importlib.resources
 import json
-import sys
-import tempfile
-
-import typer
+from typing import TYPE_CHECKING, Any
 
 import cli
 
-app: typer.Typer = typer.Typer(name="cspell-init")
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
-@app.command()
 def main() -> None:
-    ignore_paths: list[str] = sorted(
-        ["**/.cspell.*", "**/.git", "**/*-lock.*", "**/*.lock*"]
+    cfg: Any = cli.utils.load(importlib.resources.files("cli.assets") / ".cspell.json")  # pyright: ignore [reportArgumentType]
+    cfg_fpath: Path = cli.utils.git.root() / ".cspell.json"
+    with cfg_fpath.open("w") as fp:
+        json.dump(cfg, fp, ensure_ascii=False, sort_keys=False)
+    stdout: str = cli.utils.run_with_output(
+        [
+            "cspell",
+            "lint",
+            "--words-only",
+            "--unique",
+            "--no-exit-code",
+            "--dot",
+            "--gitignore",
+            "--color",
+            ".",
+        ],
+        cwd=cli.utils.git.root(),
     )
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".json") as fp:
-        json.dump(
-            {
-                "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-types/cspell.schema.json",
-                "version": "0.2",
-                "language": "en",
-                "words": [],
-                "ignorePaths": ignore_paths,
-                "allowCompoundWords": True,
-            },
-            fp,
-        )
-        fp.flush()
-        stdout: str = cli.utils.run_with_output(
-            [
-                "cspell",
-                "lint",
-                "--config",
-                fp.name,
-                "--words-only",
-                "--unique",
-                "--no-exit-code",
-                "--dot",
-                "--gitignore",
-                "--color",
-                ".",
-            ]
-        )
     words: set[str] = {word.lower() for word in stdout.splitlines()}
-    json.dump(
-        {
-            "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-types/cspell.schema.json",
-            "version": "0.2",
-            "language": "en",
-            "words": sorted(words),
-            "ignorePaths": ignore_paths,
-            "allowCompoundWords": True,
-        },
-        sys.stdout,
-        ensure_ascii=False,
-        sort_keys=False,
-    )
+    cfg["words"] = sorted(words)
+    with cfg_fpath.open("w") as fp:
+        json.dump(cfg, fp, ensure_ascii=False, sort_keys=False)
+    cli.utils.run(["prettier", "--write", cfg_fpath])

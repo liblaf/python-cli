@@ -1,26 +1,13 @@
 import os
 import shutil
 from pathlib import Path
-from typing import Annotated
 
-import typer
+from toml_sort import tomlsort
 
 import cli
 
-try:
-    from toml_sort import tomlsort
-except ImportError as err:
-    msg = "sort-toml"
-    raise cli.utils.ExtraNotInstalledError(msg) from err
 
-
-app: typer.Typer = typer.Typer(name="sort-toml")
-
-
-@app.command()
-def main(
-    files: Annotated[list[Path], typer.Argument(exists=True, dir_okay=False)],
-) -> None:
+def main(files: list[Path]) -> None:
     for fpath in files:
         text: str = fpath.read_text()
         schema_comment: str = ""

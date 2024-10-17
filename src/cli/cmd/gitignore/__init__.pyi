@@ -1,4 +1,4 @@
 from . import update
-from ._main import app
+from ._cli import app
 
 __all__ = ["app", "update"]

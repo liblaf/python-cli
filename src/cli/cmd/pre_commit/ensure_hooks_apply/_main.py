@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Annotated, Any
+from typing import Any
 
 import pre_commit
 import pre_commit.clientlib
@@ -9,15 +9,9 @@ import pre_commit.git
 import pre_commit.hook
 import pre_commit.repository
 import pre_commit.store
-import typer
-
-app: typer.Typer = typer.Typer(name="ensure-hooks-apply")
 
 
-@app.command()
-def main(
-    config: Annotated[Path, typer.Argument(exists=True, dir_okay=False, writable=True)],
-) -> None:
+def main(config: Path) -> None:
     """Check hooks apply to the repository.
 
     Reference:
@@ -38,3 +32,4 @@ def main(
             exclude.append(hook)
         else:
             include.append(hook)
+    raise NotImplementedError  # TODO: implement

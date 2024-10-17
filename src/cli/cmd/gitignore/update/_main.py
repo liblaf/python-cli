@@ -1,21 +1,9 @@
 from pathlib import Path
-from typing import Annotated
 
 import httpx
-import typer
-
-import cli
-
-app: typer.Typer = typer.Typer(name="gitignore")
 
 
-@app.command()
-def main(
-    gitignore: Annotated[
-        Path,
-        typer.Argument(default_factory=lambda: cli.utils.git.root() / ".gitignore"),
-    ],
-) -> None:
+def main(gitignore: Path) -> None:
     lines: list[str] = gitignore.read_text().splitlines()
     result: list[str] = []
     between_markers: bool = False

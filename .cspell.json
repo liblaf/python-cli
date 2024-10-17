@@ -20,7 +20,6 @@
     "pipenv",
     "pybuilder",
     "pycache",
-    "pycomplete",
     "pydantic",
     "pydocstyle",
     "pyenv",
@@ -45,6 +44,12 @@
     "typer",
     "venv"
   ],
-  "ignorePaths": ["**/*-lock.*", "**/*.lock*", "**/.cspell.*", "**/.git"],
+  "ignorePaths": [
+    "**/.cspell.*",
+    "**/.git",
+    "**/.vscode",
+    "**/*-lock.*",
+    "**/*.lock*"
+  ],
   "allowCompoundWords": true
 }

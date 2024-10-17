@@ -2,6 +2,11 @@ name: CI
 
 on:
   push:
+  release:
+    types: published
+
+env:
+  UV_INDEX_URL: https://pypi.org/simple
 
 jobs:
   build:
@@ -21,46 +26,15 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build
+          name: dist
           path: dist/
-      - name: Create Pre-Release
-        uses: liblaf/actions/release@main
-        with:
-          clobber: true
-          files: |-
-            dist/*.tar.gz
-            dist/*.whl
-          prerelease: true
-          tag: latest
-
-  release-please:
-    name: Release Please
-    permissions:
-      contents: write
-      pull-requests: write
-    if: ${{ github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-      cancel-in-progress: true
-    outputs:
-      created: ${{ steps.release.outputs.release_created }}
-      tag-name: ${{ steps.release.outputs.tag_name }}
-    steps:
-      - id: release
-        name: Release Please
-        uses: googleapis/release-please-action@v4
-        with:
-          config-file: .github/release-please/config.json
-          manifest-file: .github/release-please/.manifest.json
 
   release:
     name: Release
     permissions:
       contents: write
     needs:
-      - release-please
-    if: ${{ needs.release-please.outputs.created == 'true' }}
+      - build
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
@@ -69,11 +43,25 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build
+          name: dist
           path: dist/
-      - name: Upload Release Assets
+      - if: ${{ github.event_name == 'release' }}
+        name: Upload Release Assets
+        uses: liblaf/actions/release@main
+        with:
+          clobber: false
+          files: |-
+            dist/*.tar.gz
+            dist/*.whl
+          prerelease: false
+          tag: ${{ github.event.release.tag_name }}
+      - if: ${{ github.ref == 'refs/heads/main' }}
+        name: Upload Release Assets
         uses: liblaf/actions/release@main
         with:
           clobber: true
-          files: dist/*
-          tag: ${{ needs.release-please.outputs.tag-name }}
+          files: |-
+            dist/*.tar.gz
+            dist/*.whl
+          prerelease: true
+          tag: latest

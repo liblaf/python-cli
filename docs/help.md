@@ -28,6 +28,10 @@ $ q cat-repo [OPTIONS]
 
 **Options**:
 
+- `--brief / --no-brief`: [default: no-brief]
+- `--exclude TEXT`: [default: .*ignore, .cspell.*, .env.*, .env, .envrc.*, .envrc, .github/copier/, .github/linters/, .github/release-please/, .github/renovate.json, .vscode/, *-lock.*, *.lock, CHANGELOG.md]
+- `--exclude-extend TEXT`
+- `-o, --output PATH`
 - `--help`: Show this message and exit.
 
 ## `q cspell-init`

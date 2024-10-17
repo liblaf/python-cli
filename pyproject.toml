@@ -29,6 +29,9 @@ requires-python = ">=3.11"
 version = "0.0.0"
 
 [project.scripts]
+cat-repo = "cli.cmd.cat_repo:app"
+cspell-init = "cli.cmd.cspell_init:app"
+gitignore = "cli.cmd.gitignore:app"
 q = "cli.cmd:app"
 sort-toml = "cli.cmd.sort_toml:app"
 

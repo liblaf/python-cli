@@ -3,7 +3,7 @@
 **Usage**:
 
 ```console
-$ q [OPTIONS] COMMAND [ARGS]...
+q [OPTIONS] COMMAND [ARGS]...
 ```
 
 **Options**:
@@ -23,7 +23,7 @@ $ q [OPTIONS] COMMAND [ARGS]...
 **Usage**:
 
 ```console
-$ q cat-repo [OPTIONS]
+q cat-repo [OPTIONS]
 ```
 
 **Options**:
@@ -39,7 +39,7 @@ $ q cat-repo [OPTIONS]
 **Usage**:
 
 ```console
-$ q cspell-init [OPTIONS]
+q cspell-init [OPTIONS]
 ```
 
 **Options**:
@@ -51,7 +51,7 @@ $ q cspell-init [OPTIONS]
 **Usage**:
 
 ```console
-$ q gitignore [OPTIONS] COMMAND [ARGS]...
+q gitignore [OPTIONS] COMMAND [ARGS]...
 ```
 
 **Options**:
@@ -67,7 +67,7 @@ $ q gitignore [OPTIONS] COMMAND [ARGS]...
 **Usage**:
 
 ```console
-$ q gitignore update [OPTIONS] [GITIGNORE]
+q gitignore update [OPTIONS] [GITIGNORE]
 ```
 
 **Arguments**:
@@ -83,7 +83,7 @@ $ q gitignore update [OPTIONS] [GITIGNORE]
 **Usage**:
 
 ```console
-$ q pre-commit-utils [OPTIONS] COMMAND [ARGS]...
+q pre-commit-utils [OPTIONS] COMMAND [ARGS]...
 ```
 
 **Options**:
@@ -99,7 +99,7 @@ $ q pre-commit-utils [OPTIONS] COMMAND [ARGS]...
 **Usage**:
 
 ```console
-$ q pre-commit-utils ensure-hooks-apply [OPTIONS] CONFIG
+q pre-commit-utils ensure-hooks-apply [OPTIONS] CONFIG
 ```
 
 **Arguments**:
@@ -115,7 +115,7 @@ $ q pre-commit-utils ensure-hooks-apply [OPTIONS] CONFIG
 **Usage**:
 
 ```console
-$ q sort-toml [OPTIONS] FILES...
+q sort-toml [OPTIONS] FILES...
 ```
 
 **Arguments**:

@@ -26,7 +26,7 @@ license = "MIT"
 name = "python-cli"
 readme = "README.md"
 requires-python = ">=3.11"
-version = "0.0.0"
+version = "0.0.1"
 
 [project.scripts]
 cat-repo = "cli.cmd.cat_repo:app"

@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.0.1](https://github.com/liblaf/python-cli/compare/v0.0.0...v0.0.1) (2024-11-26)
+
+
+### 📝 Documentation
+
+* update CLI options in help documentation ([18ac7c8](https://github.com/liblaf/python-cli/commit/18ac7c8d27076ced15adf5000f80310e43e43229))
+
+
+### ♻ Code Refactoring
+
+* reorganize CLI command structure and improve documentation generation ([9e38efc](https://github.com/liblaf/python-cli/commit/9e38efc105e76aeb8bcd6cfa209a5a7fa39c5d64))
+
+
+### 🔧 Continuous Integration
+
+* streamline release process and integrate release-please ([6b1b5b3](https://github.com/liblaf/python-cli/commit/6b1b5b3d7af45ac510c854b69bcb29f34b70ad3b))
+* update release event configuration in CI workflow ([fb629ac](https://github.com/liblaf/python-cli/commit/fb629ace3abe1e68f628d561d6d41f0cbdbdfb6c))
+
 ## 0.0.0 (2024-10-14)
 
 ### ✨ Features
